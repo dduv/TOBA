@@ -6,10 +6,17 @@ package Duvall.business;
  * and open the template in the editor.
  */
 import java.io.IOException;
+import java.io.Serializable;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+import Duvall.business.User;
+//*import Duvall.data.UserDB; //
 
 /**
  *
@@ -64,9 +71,9 @@ public class NewCustomerServlet extends HttpServlet {
             String state = request.getParameter("state");
             String zipCode = request.getParameter("zipCode");
             String email = request.getParameter("email");
+            String userName = lastName + zipCode;
+            String password = "welcome1";  // default initial password
 
-            // store data in User object
-            // User user = new User(firstName, lastName, phone, address, city, state, zipCode, email);
             
             // validate the parameters
             String message;
@@ -77,8 +84,12 @@ public class NewCustomerServlet extends HttpServlet {
 
             } else {
                 message = "";
-                url = "/Success.html";
-                // UserDB.insert(user);
+                url = "/Success.jsp";
+                
+            // store data in User object
+            User user = new User(userName, password, firstName, lastName, phone, address, city, state, zipCode, email);
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
             }
             // request.setAttribute("user", user);
             request.setAttribute("message", message);

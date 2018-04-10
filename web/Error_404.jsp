@@ -20,5 +20,4 @@
         <p>To continue, click the Back button.</p>
 
 
-    </body>
-</html>
+<%@ include file="/footer.jsp" %>

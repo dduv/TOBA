@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TOBA Titan Online Banking Application</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
+<%-- 
+    Document   : Login
+    Created on : Apr 9, 2018, 10:03:54 PM
+    Author     : dduv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="/header.html" %>
         <div>Log In</div>
 
         <form action="login" method="post">
@@ -23,12 +18,17 @@ and open the template in the editor.
             <!-- // Login button -->
             <label>&nbsp;</label>
             <input type="submit" value="Login" class="margin_left">
+            
+            <!-- // Reset Password button -->
+            <label>&nbsp;</label>
+            <a href="password_reset.jsp">Reset Password</a>
 
             <!-- // link to "New Customer Sign Up page" -->
             <label>&nbsp;</label>
             <a href="New_customer.jsp">New Customer Sign Up</a>
            
 
-        </form>      
-    </body>
-</html>
+        </form>     
+        
+<%@ include file="/footer.jsp" %>
+

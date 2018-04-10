@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,7 +29,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "Login.html";
+        String url = "Login.jsp";
 
         // get current action
         String action = request.getParameter("action");
@@ -40,17 +41,25 @@ public class LoginServlet extends HttpServlet {
         if (action.equals("join")) {
             url = "/index.jsp"; // the join page
         } else if (action.equals("login")) {
-            // get parameters from the request
+            // get parameter(s) from the request
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
                 if (!username.equals("jsmith@toba.com") || !password.equals("letmein")) {
-                   url = "/Login_failure.html";
-                } else // forward the request to the account_activity.htm
+                   url = "/Login_failure.jsp";
+                } else // forward the request to the account_activity.jsp
                 {
-                   url = "/Account_activity.html";
+                   url = "/account_activity.jsp";
                 }
 
+            } else if (action.equals("reset")) {
+            // get parameter(s) from the request
+            String newPassword = request.getParameter("newPassword");
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user"); 
+            user.setPassword(newPassword);  // modify password in user
+            session.setAttribute("user", user); // save entire user object in session scope
+            url = "/account_activity.jsp";
             }
 
         getServletContext()
