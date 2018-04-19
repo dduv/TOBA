@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "Login.jsp";
+        String url = "/Login.jsp";
 
         // get current action
         String action = request.getParameter("action");
