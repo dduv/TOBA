@@ -11,7 +11,7 @@
         <form action="login" method="post">
             <input type="hidden" name="action" value="login">
             <label class="pad_top">Username:</label>
-            <input type="email" name="username" required><br>
+            <input type="text" name="username" required><br>
             <label class="pad_top">Password:</label>
             <input type="password" name="password" required><br>
 
