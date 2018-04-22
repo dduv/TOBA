@@ -5,18 +5,12 @@ package Duvall.business;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.io.IOException;
-import java.io.Serializable;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
 import Duvall.business.User;
-//*import Duvall.data.UserDB; //
+import Duvall.data.UserDB;
 
 /**
  *
@@ -37,7 +31,6 @@ public class NewCustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-       
     }
 
     /**
@@ -52,7 +45,7 @@ public class NewCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = "/New_customer.jsp";
-         // get current action
+        // get current action
         String action = request.getParameter("action");
         if (action == null) {
             action = "join"; // default action
@@ -74,7 +67,6 @@ public class NewCustomerServlet extends HttpServlet {
             String userName = lastName + zipCode;
             String password = "welcome1";  // default initial password
 
-            
             // validate the parameters
             String message;
             if (firstName == null || lastName == null || phone == null || address == null || city == null || state == null || zipCode == null || email == null
@@ -85,11 +77,15 @@ public class NewCustomerServlet extends HttpServlet {
             } else {
                 message = "";
                 url = "/Success.jsp";
-                
-            // store data in User object
-            User user = new User(userName, password, firstName, lastName, phone, address, city, state, zipCode, email);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+
+                // store data in User object
+                User user = new User(userName, password, firstName, lastName, phone, address, city, state, zipCode, email);
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+
+                // add new customer to database
+                UserDB.insert(user);
+
             }
             // request.setAttribute("user", user);
             request.setAttribute("message", message);

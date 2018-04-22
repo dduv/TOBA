@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Duvall.business.User;
+
 /**
  *
  * @author dduv
@@ -44,26 +46,26 @@ public class LoginServlet extends HttpServlet {
             // get parameter(s) from the request
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-                
+
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
-            
-           if (!username.equals(user.getUserName()) || !password.equals(user.getPassword())) {
-                   url = "/Login_failure.jsp";
-                } else // forward the request to the account_activity.jsp
-                {
-                   url = "/account_activity.jsp";
-               }
 
-            } else if (action.equals("reset")) {
-            // get parameter(s) from the request
-                String newPassword = request.getParameter("newPassword");
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute("user"); 
-                user.setPassword(newPassword);  // modify password in user
-                session.setAttribute("user", user); // save entire user object in session scope
+            if (!username.equals(user.getUserName()) || !password.equals(user.getPassword())) {
+                url = "/Login_failure.jsp";
+            } else // forward the request to the account_activity.jsp
+            {
                 url = "/account_activity.jsp";
             }
+
+        } else if (action.equals("reset")) {
+            // get parameter(s) from the request
+            String newPassword = request.getParameter("newPassword");
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            user.setPassword(newPassword);  // modify password in user
+            session.setAttribute("user", user); // save entire user object in session scope
+            url = "/account_activity.jsp";
+        }
 
         getServletContext()
                 .getRequestDispatcher(url)

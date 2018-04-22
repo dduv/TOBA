@@ -9,16 +9,19 @@ package Duvall.business;
  *
  * @author dduv
  */
-
 import java.io.Serializable;
+import javax.persistence.*;
 
 /* 
 public class User {
 }  
-*/
-
+ */
+@Entity
 public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
     private String userName;
     private String password;
     private String firstName;
@@ -29,7 +32,6 @@ public class User implements Serializable {
     private String state;
     private String zipCode;
     private String email;
-    
 
     public User() {
         userName = "";
@@ -57,6 +59,14 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -64,16 +74,16 @@ public class User implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
-     public String getPassword() {
+
+    public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
-    
-     public String getFirstName() {
+
+    public String getFirstName() {
         return firstName;
     }
 
@@ -89,47 +99,47 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-     public String getPhone() {
+    public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
-     public String getAddress() {
+
+    public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
-    
-     public String getCity() {
+
+    public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
     }
-    
-     public String getState() {
+
+    public String getState() {
         return state;
     }
 
     public void setState(String state) {
         this.state = state;
     }
-    
-     public String getZipCode() {
+
+    public String getZipCode() {
         return zipCode;
     }
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-    
-     public String getEmail() {
+
+    public String getEmail() {
         return email;
     }
 
