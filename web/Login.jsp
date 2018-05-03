@@ -26,6 +26,10 @@
             <!-- // link to "New Customer Sign Up page" -->
             <label>&nbsp;</label>
             <a href="New_customer.jsp">New Customer Sign Up</a>
+            
+            <!-- // link to "Admin Login page"
+            <label>&nbsp;</label>
+            <a href="admin/login.html">Admin Access</a>   -->
            
 
         </form>     

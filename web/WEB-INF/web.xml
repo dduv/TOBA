@@ -11,18 +11,15 @@
         //* request to the login_failure.html page. -->
         <servlet-class>Duvall.business.LoginServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>NewCustomerServlet</servlet-name>
-        <servlet-class>Duvall.business.NewCustomerServlet</servlet-class>      
+        <servlet-class>Duvall.business.NewCustomerServlet</servlet-class>
     </servlet>
-    
     <servlet>
         <servlet-name>TransactionServlet</servlet-name>
         <!-- //* TransactionServlet – Just create an empty servlet for now. -->
         <servlet-class>Duvall.data.TransactionServlet</servlet-class>
     </servlet>
-    
     <!-- //* map all servlets -->
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -36,7 +33,6 @@
         <servlet-name>TransactionServlet</servlet-name>
         <url-pattern>/transaction</url-pattern>
     </servlet-mapping>
-    
     <error-page>
         <error-code>404</error-code>
         <location>/Error_404.jsp</location>
@@ -45,16 +41,47 @@
         <exception-type>java.lang.Throwable</exception-type>
         <location>/Error_java.jsp</location>
     </error-page>
-    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/admin/login.html</form-login-page>
+            <form-error-page>/admin/login_error.html</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>programmers</description>
+        <role-name>programmer</role-name>
+    </security-role>
+    <security-role>
+        <description>administrators</description>
+        <role-name>service</role-name>
+    </security-role>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+            <!-- NOT SECURE - Don't include these elements
+            <http-method>>GET</http-method>
+            <http-method>POST</http-method>  
+            -->
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>programmer</role-name>
+            <role-name>service</role-name>
+        </auth-constraint>
+        <!--
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+        -->
+    </security-constraint>
 </web-app>
